@@ -52,11 +52,11 @@ void gpio_init(void)
 	CLOCK_EnableClock(kCLOCK_PortE);
 
 
-	 PORT_SetPinMux(PORTB, B2_P1, kPORT_MuxAsGpio);
-	 GPIO_PinInit(GPIOB, B2_P1, &gpio_input_config);
+	 PORT_SetPinMux(PORTB, B18_P1, kPORT_MuxAsGpio);
+	 GPIO_PinInit(GPIOB, B18_P1, &gpio_input_config);
 
-	 PORT_SetPinMux(PORTB, B3_P2, kPORT_MuxAsGpio);
-	 GPIO_PinInit(GPIOB, B3_P2, &gpio_input_config);
+	 PORT_SetPinMux(PORTB, B19_P2, kPORT_MuxAsGpio);
+	 GPIO_PinInit(GPIOB, B18_P1, &gpio_input_config);
 
 	 PORT_SetPinMux(PORTB, B10_P3, kPORT_MuxAsGpio);
 	 GPIO_PinInit(GPIOB, B10_P3, &gpio_input_config);

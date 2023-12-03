@@ -14,8 +14,8 @@
 #include "MK64F12.h"
 #include "Bits.h"
 
-#define B2_P1 2
-#define B3_P2 3
+#define B18_P1 18
+#define B19_P2 19
 #define B10_P3 10
 #define B11_P4 11
 #define C11_P5 11

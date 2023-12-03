@@ -7,6 +7,24 @@
 
 #include "encoder.h"
 
+static uint8_t p1_en1 = 0;
+static uint8_t p2_en1 = 0;
+static uint8_t p3_en1 = 0;
+static uint8_t p4_en1 = 0;
+static uint8_t p5_en1 = 0;
+static uint8_t p6_en1 = 0;
+static uint8_t p7_en1 = 0;
+static uint8_t p8_en1 = 0;
+
+static uint8_t p1_en2 = 0;
+static uint8_t p2_en2 = 0;
+static uint8_t p3_en2 = 0;
+static uint8_t p4_en2 = 0;
+static uint8_t p5_en2 = 0;
+static uint8_t p6_en2 = 0;
+static uint8_t p7_en2 = 0;
+static uint8_t p8_en2 = 0;
+
 static const uint8_t tabla_magica[128] =
 {
 		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
@@ -578,6 +596,41 @@ uint8_t pos_range_255(uint8_t dec_output)
 	if(254 == dec_output)
 	{
 		position = tabla_magica[112];
+	}
+	return position;
+}
+
+void get_bits (void)
+{
+	p1_en1 = gpio_get_pin(GPIOB, B18_P1);
+	p2_en1 = gpio_get_pin(GPIOB, B19_P2);
+	p3_en1 = gpio_get_pin(GPIOB, B10_P3);
+	p4_en1 = gpio_get_pin(GPIOB, B11_P4);
+	p5_en1 = gpio_get_pin(GPIOC, C11_P5);
+	p6_en1 = gpio_get_pin(GPIOC, C10_P6);
+	p7_en1 = gpio_get_pin(GPIOB, B20_P7);
+	p8_en1 = gpio_get_pin(GPIOD, D1_P8);
+
+	p1_en2 = gpio_get_pin(GPIOC, C3_P1);
+	p2_en2 = gpio_get_pin(GPIOC, C2_P2);
+	p3_en2 = gpio_get_pin(GPIOA, A2_P3);
+	p4_en2 = gpio_get_pin(GPIOB, B23_P4);
+	p5_en2 = gpio_get_pin(GPIOA, A1_P5);
+	p6_en2 = gpio_get_pin(GPIOB, B9_P6);
+	p7_en2 = gpio_get_pin(GPIOB, C17_P7);
+	p8_en2 = gpio_get_pin(GPIOB, C16_P8);
+}
+
+uint8_t read_encoder(uint8_t which_enc)
+{
+	uint8_t position = 0;
+	if (0 == which_enc)
+	{
+		position = get_position(p1_en1, p2_en1, p3_en1, p4_en1, p5_en1, p6_en1, p7_en1, p8_en1);
+	}
+	if (1 == which_enc)
+	{
+		position = get_position(p1_en2, p2_en2, p3_en2, p4_en2, p5_en2, p6_en2, p7_en2, p8_en2);
 	}
 	return position;
 }
