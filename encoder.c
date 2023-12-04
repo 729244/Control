@@ -38,7 +38,7 @@ static const uint8_t tabla_magica[128] =
 };
 
 
-uint8_t get_position(uint8_t p8, uint8_t p7, uint8_t p6,uint8_t p5, uint8_t p4, uint8_t p3, uint8_t p2, uint8_t p1)
+uint8_t get_position(uint8_t p1, uint8_t p2, uint8_t p3,uint8_t p4, uint8_t p5, uint8_t p6, uint8_t p7, uint8_t p8)
 {
 	uint8_t dec_output = (p8*128)+(p7*64)+(p6*32)+(p5*16)+(p4*8)+(p3*4)+(p2*2)+p1;
 	static uint8_t position = 0;
@@ -617,8 +617,8 @@ void get_bits (void)
 	p4_en2 = gpio_get_pin(GPIOB, B23_P4);
 	p5_en2 = gpio_get_pin(GPIOA, A1_P5);
 	p6_en2 = gpio_get_pin(GPIOB, B9_P6);
-	p7_en2 = gpio_get_pin(GPIOB, C17_P7);
-	p8_en2 = gpio_get_pin(GPIOB, C16_P8);
+	p7_en2 = gpio_get_pin(GPIOC, C17_P7);
+	p8_en2 = gpio_get_pin(GPIOC, C16_P8);
 }
 
 uint8_t read_encoder(uint8_t which_enc)

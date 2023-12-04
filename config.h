@@ -24,7 +24,7 @@
 #define D1_P8 1
 
 #define C3_P1 3
-#define E24_P2 2
+#define E24_P2 24
 #define A2_P3 2
 #define B23_P4 23
 #define A1_P5 1
