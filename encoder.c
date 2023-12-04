@@ -623,6 +623,7 @@ void get_bits (void)
 
 uint8_t read_encoder(uint8_t which_enc)
 {
+	get_bits();
 	uint8_t position = 0;
 	if (0 == which_enc)
 	{
