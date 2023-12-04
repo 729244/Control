@@ -20,8 +20,11 @@
 #define BOARD_THIRD_FTM_CHANNEL 2U
 #define BOARD_FOUR_FTM_CHANNEL 3U
 
-#define DEMO_PWM_FREQUENCY (24000U)
+#define DEMO_PWM_FREQUENCY (50000U)
 #define FTM_PWM_ON_LEVEL kFTM_HighTrue
 
+void ftm_init();
+void ftm_start();
+void ftm_set_duty_cycle(uint8_t , uint8_t);
 
 #endif /* FTM_H_ */

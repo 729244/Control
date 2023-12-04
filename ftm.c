@@ -52,6 +52,8 @@ void ftm_init(){
     ftmParam[3].firstEdgeDelayPercent = 0U;
     ftmParam[3].enableComplementary   = false;
     ftmParam[3].enableDeadtime        = false;
+
+    FTM_SetupPwm(BOARD_FTM_BASEADDR, ftmParam, 4U, kFTM_EdgeAlignedPwm, DEMO_PWM_FREQUENCY, FTM_SOURCE_CLOCK);
 }
 
 void ftm_start(){

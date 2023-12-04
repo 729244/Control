@@ -46,7 +46,7 @@ typedef struct
 #define TIME_1 10000u //10 milliseconds
 #define TIME_2 100u //10o microseconds
 
-#define INTERRUPT_MASK 0xFFFF
+#define INTERRUPT_MASK 0xFFFFFFFF
 
 void pit_init (void);
 void PIT_clear_irq_status(pit_name_t);
