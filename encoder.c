@@ -612,7 +612,7 @@ void get_bits (void)
 	p8_en1 = gpio_get_pin(GPIOD, D1_P8);
 
 	p1_en2 = gpio_get_pin(GPIOC, C3_P1);
-	p2_en2 = gpio_get_pin(GPIOC, C2_P2);
+	p2_en2 = gpio_get_pin(GPIOE, E24_P2);
 	p3_en2 = gpio_get_pin(GPIOA, A2_P3);
 	p4_en2 = gpio_get_pin(GPIOB, B23_P4);
 	p5_en2 = gpio_get_pin(GPIOA, A1_P5);

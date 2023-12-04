@@ -80,8 +80,8 @@ void gpio_init(void)
 	 PORT_SetPinMux(PORTC, C3_P1, kPORT_MuxAsGpio);
 	 GPIO_PinInit(GPIOC, C3_P1, &gpio_input_config);
 
-	 PORT_SetPinMux(PORTC, C2_P2, kPORT_MuxAsGpio);
-	 GPIO_PinInit(GPIOC, C2_P2, &gpio_input_config);
+	 PORT_SetPinMux(PORTE, E24_P2, kPORT_MuxAsGpio);
+	 GPIO_PinInit(GPIOE, E24_P2, &gpio_input_config);
 
 	 PORT_SetPinMux(PORTA, A2_P3, kPORT_MuxAsGpio);
 	 GPIO_PinInit(GPIOA, A2_P3, &gpio_input_config);
