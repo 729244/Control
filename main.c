@@ -72,7 +72,7 @@ int main(void) {
     		//current_giro = INA219_get_current(0);
     		radianes_giro = read_encoder(0);
     		error = 1 - radianes_giro;
-    		salida = error*15 + (Im1 + em1*1*0.0001);
+    		salida = error*15;
     		cycle = salida/12*100;
     		if(0 > cycle){
     			cycle = cycle * -1;
