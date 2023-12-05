@@ -629,13 +629,13 @@ float read_encoder(uint8_t which_enc)
 	if (0 == which_enc)
 	{
 		position = get_position(p1_en1, p2_en1, p3_en1, p4_en1, p5_en1, p6_en1, p7_en1, p8_en1);
-		radians = position*0.0495;
-		if(radians >= 112){
-			radians = radians - 112;
+		if(position >= 112){
+			position = position - 112;
 		}
 		else{
-			radians += 16;
+			position += 16;
 		}
+		radians = position*0.0495;
 	}
 	if (1 == which_enc)
 	{
