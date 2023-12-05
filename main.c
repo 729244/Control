@@ -14,10 +14,68 @@
 #include "ftm.h"
 #include "fsl_clock.h"
 
-#define KP = 3;
+#define KP 15
+#define MAX_POS	2.37
+#define MIN_POS	0.79
+#define PERCENT 100
+#define VIN 12
+
 static void CLOCK_CONFIG_SetFllExtRefDiv(uint8_t frdiv)
 {
     MCG->C1 = ((MCG->C1 & ~MCG_C1_FRDIV_MASK) | MCG_C1_FRDIV(frdiv));
+}
+
+static float radianes_giro = 0;
+static float error = 0;
+static float salida = 0;
+static float cycle = 0;
+
+void min_pos(){
+	radianes_giro = read_encoder(0);
+	error = MIN_POS - radianes_giro;
+	salida = error * KP;
+	cycle = salida/VIN*PERCENT;
+	if(0 > cycle){
+		cycle = cycle * -1;
+		if(PERCENT < cycle)
+		{
+			cycle = PERCENT;
+		}
+		ftm_set_duty_cycle(0, 0);
+		ftm_set_duty_cycle(2, (uint8_t)cycle);
+	}
+	else{
+		if(PERCENT < cycle)
+		{
+			cycle = PERCENT;
+		}
+		ftm_set_duty_cycle(2, 0);
+		ftm_set_duty_cycle(0, (uint8_t)cycle);
+	}
+}
+
+void max_pos(){
+	radianes_giro = read_encoder(0);
+	error = MAX_POS - radianes_giro;
+	salida = error * KP;
+	cycle = salida/VIN*PERCENT;
+	if(0 > cycle){
+		cycle = cycle * -1;
+		if(PERCENT < cycle)
+		{
+			cycle = PERCENT;
+		}
+		ftm_set_duty_cycle(0, 0);
+		ftm_set_duty_cycle(2, (uint8_t)cycle);
+	}
+	else{
+		if(PERCENT < cycle)
+		{
+			cycle = PERCENT;
+		}
+		ftm_set_duty_cycle(2, 0);
+		ftm_set_duty_cycle(0, (uint8_t)cycle);
+	}
 }
 
 int main(void) {
@@ -53,13 +111,6 @@ int main(void) {
 
 	NVIC_global_enable_interrupts;
 
-	float radianes_giro = 0;
-	float error = 0;
-	float salida = 0;
-	float cycle = 0;
-	float Im1 = 0;
-	float em1 = 0;
-
 	pit_set_timer(PIT_CH0, 100);
 
 	pit_start_timer(PIT_CH0);
@@ -71,25 +122,15 @@ int main(void) {
     		pit_flag = FALSE;
     		//current_giro = INA219_get_current(0);
     		radianes_giro = read_encoder(0);
-    		error = 1 - radianes_giro;
-    		salida = error*15 + (Im1 + em1*1*0.0001);
-    		cycle = salida/12*100;
-    		if(0 > cycle){
-    			cycle = cycle * -1;
-    			if(100 < cycle)
-    			{
-    				cycle = 100;
-    			}
-    			ftm_set_duty_cycle(0, 0);
-    			ftm_set_duty_cycle(2, (uint8_t)cycle);
+    		if(radianes_giro < MIN_POS){
+    			min_pos();
+    		}
+    		else if(radianes_giro > MAX_POS){
+    			max_pos();
     		}
     		else{
-    			if(100 < cycle)
-    			{
-    				cycle = 100;
-    			}
     			ftm_set_duty_cycle(2, 0);
-    			ftm_set_duty_cycle(0, (uint8_t)cycle);
+    			ftm_set_duty_cycle(0, 0);
     		}
     	}
     	FTM_SetSoftwareTrigger(BOARD_FTM_BASEADDR, true);
