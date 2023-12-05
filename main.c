@@ -68,6 +68,8 @@ int main(void) {
 	float error = 0;
 	float salida = 0;
 	float cycle = 0;
+	float Im1 = 0;
+	float em1 = 0;
 
 	pit_set_timer(PIT_CH0, 100);
 
@@ -79,21 +81,30 @@ int main(void) {
     		PIT_clear_irq_status(PIT_CH0);
     		pit_flag = FALSE;
     		encoder_giro = read_encoder(0);
-    		current_giro = INA219_get_current(0);
+    		//current_giro = INA219_get_current(0);
     		radianes_giro = encoder_giro *0.0495;
     		error = 1 - radianes_giro;
-    		salida = error*3;
+    		salida = error*15 + (Im1 + em1*1*0.0001);
     		cycle = salida/12*100;
     		if(0 > cycle){
     			cycle = cycle * -1;
+    			if(100 < cycle)
+    			{
+    				cycle = 100;
+    			}
     			ftm_set_duty_cycle(0, 0);
     			ftm_set_duty_cycle(2, (uint8_t)cycle);
     		}
     		else{
+    			if(100 < cycle)
+    			{
+    				cycle = 100;
+    			}
     			ftm_set_duty_cycle(2, 0);
     			ftm_set_duty_cycle(0, (uint8_t)cycle);
     		}
     	}
+    	FTM_SetSoftwareTrigger(BOARD_FTM_BASEADDR, true);
     }
     return 0 ;
 }

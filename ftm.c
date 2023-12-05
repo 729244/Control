@@ -54,6 +54,18 @@ void ftm_init(){
     ftmParam[3].enableDeadtime        = false;
 
     FTM_SetupPwm(BOARD_FTM_BASEADDR, ftmParam, 4U, kFTM_EdgeAlignedPwm, DEMO_PWM_FREQUENCY, FTM_SOURCE_CLOCK);
+
+    /*FTM_EnableInterrupts(BOARD_FTM_BASEADDR, kFTM_Chnl0InterruptEnable);
+    FTM_EnableInterrupts(BOARD_FTM_BASEADDR, kFTM_Chnl1InterruptEnable);
+    FTM_EnableInterrupts(BOARD_FTM_BASEADDR, kFTM_Chnl2InterruptEnable);
+    FTM_EnableInterrupts(BOARD_FTM_BASEADDR, kFTM_Chnl3InterruptEnable);
+
+    EnableIRQ(FTM0_IRQn);
+    EnableIRQ(FTM1_IRQn);
+    EnableIRQ(FTM2_IRQn);
+    EnableIRQ(FTM3_IRQn);
+     */
+
 }
 
 void ftm_start(){
