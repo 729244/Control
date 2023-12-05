@@ -31,6 +31,6 @@ uint8_t pos_range_64(uint8_t dec_output);
 uint8_t pos_range_128(uint8_t dec_output);
 uint8_t pos_range_192(uint8_t dec_output);
 uint8_t pos_range_255(uint8_t dec_output);
-uint8_t read_encoder(uint8_t which_enc);
+float read_encoder(uint8_t which_enc);
 void get_bits (void);
 #endif /* ENCODER_H_ */

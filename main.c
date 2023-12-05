@@ -53,17 +53,6 @@ int main(void) {
 
 	NVIC_global_enable_interrupts;
 
-	uint8_t data[2] = {0, 0};
-	uint8_t address = 1;
-	uint8_t data_size = 2;
-	int16_t voltage = 0;
-	uint16_t encoder_1 = 0;
-
-	int16_t voltage_ref = 0;
-	uint16_t encoder_1_ref = 0;
-
-	uint8_t encoder_giro = 0;
-	float current_giro = 0;
 	float radianes_giro = 0;
 	float error = 0;
 	float salida = 0;
@@ -80,9 +69,8 @@ int main(void) {
     	if(pit_flag){
     		PIT_clear_irq_status(PIT_CH0);
     		pit_flag = FALSE;
-    		encoder_giro = read_encoder(0);
     		//current_giro = INA219_get_current(0);
-    		radianes_giro = encoder_giro *0.0495;
+    		radianes_giro = read_encoder(0);
     		error = 1 - radianes_giro;
     		salida = error*15 + (Im1 + em1*1*0.0001);
     		cycle = salida/12*100;

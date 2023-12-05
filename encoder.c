@@ -621,17 +621,27 @@ void get_bits (void)
 	p8_en2 = gpio_get_pin(GPIOC, C16_P8);
 }
 
-uint8_t read_encoder(uint8_t which_enc)
+float read_encoder(uint8_t which_enc)
 {
 	get_bits();
 	uint8_t position = 0;
+	float radians = 0;
 	if (0 == which_enc)
 	{
 		position = get_position(p1_en1, p2_en1, p3_en1, p4_en1, p5_en1, p6_en1, p7_en1, p8_en1);
+		radians = position*0.0495;
+		if(radians >= 112){
+			radians = radians - 112;
+		}
+		else{
+			radians += 16;
+		}
 	}
 	if (1 == which_enc)
 	{
 		position = get_position(p1_en2, p2_en2, p3_en2, p4_en2, p5_en2, p6_en2, p7_en2, p8_en2);
+		radians = position*0.0495;
 	}
-	return position;
+
+	return radians;
 }
